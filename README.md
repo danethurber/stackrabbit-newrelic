@@ -23,7 +23,7 @@ const listener = stackrabbit({
   ...
 })
 
-listener.use(newrelicMiddleware())
+listener.use(newrelicMiddleware('some transaction name', 'optional newrelic group'))
 
 listener.listen(function * () {
 })
