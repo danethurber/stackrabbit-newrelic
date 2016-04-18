@@ -1,4 +1,4 @@
-# Stackrabbit NewRelic [Coming Soon]
+# Stackrabbit NewRelic
 
 [![Circle CI](https://circleci.com/gh/danethurber/stackrabbit-newrelic.svg?style=shield)](https://circleci.com/gh/danethurber/stackrabbit-newrelic)
 
