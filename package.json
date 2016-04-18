@@ -1,6 +1,6 @@
 {
   "name": "stackrabbit-newrelic",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "NewRelic middleware for stackrabbit",
   "main": "index.js",
   "scripts": {
