@@ -1,21 +1,23 @@
 var co = require('co')
 var newrelic = require('newrelic')
 
-module.exports = function(transactionName, groupName) {
-  groupName = groupName || 'rabbit:listener'
+module.exports = function(name, group) {
+  group = group || 'rabbit:listener'
 
-  return newrelic.createBackgroundTransaction(
-    transactionName,
-    groupName,
-    co.wrap(function * (next) {
-      try {
-        yield next
-      } catch(err) {
-        newrelic.noticeError(err)
-        throw err
-      } finally {
-        newrelic.endTransaction()
-      }
-    })
-  )
+  return function * () {
+    newrelic.createBackgroundTransaction(
+      name,
+      group,
+      co.wrap(function * (next) {
+        try {
+          yield next
+        } catch(err) {
+          newrelic.noticeError(err)
+          this.onError(err)
+        } finally {
+          newrelic.endTransaction()
+        }
+      }.bind(this))
+    ).apply(this, arguments)
+  }
 }
